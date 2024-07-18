@@ -1,5 +1,5 @@
 import { Manga } from "src/manga/manga.entity";
-import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
@@ -10,6 +10,7 @@ export class User {
     @Column()
     name: string
 
-    @OneToMany(type => Manga, manga => manga.user)
+    @ManyToMany(type => Manga, manga => manga.user)
+    @JoinTable()
     mangas: Manga[];
 }

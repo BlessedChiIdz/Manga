@@ -12,7 +12,9 @@ export class MangaService {
       ) {}
     
       create(manga:Manga){
-        this.usersRepository.save(manga)
+       return this.usersRepository.save(manga)
       }
+
+      
 
 }

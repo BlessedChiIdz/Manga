@@ -7,6 +7,6 @@ import { MangaService } from './manga.service';
 @Module({
   imports:[TypeOrmModule.forFeature([Manga])],
   controllers: [MangaController],
-  providers: [MangaService]
+  providers: [MangaService],
 })
 export class MangaModule {}

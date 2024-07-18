@@ -1,5 +1,5 @@
 import { User } from "src/user/user.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
@@ -10,6 +10,6 @@ export class Manga {
     @Column()
     name:string
 
-    @ManyToOne(type => User, user => user.mangas)
+    @ManyToMany(type => User, user => user.mangas)
     user: User 
 }
