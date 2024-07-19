@@ -13,4 +13,4 @@ export class User {
     @ManyToMany(type => Manga, manga => manga.user)
     @JoinTable()
     mangas: Manga[];
-}
+} 

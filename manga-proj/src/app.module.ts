@@ -6,6 +6,11 @@ import { UserModule } from './user/user.module';
 import { MangaModule } from './manga/manga.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ParserController } from './parser/parser.controller';
+import { ParserService } from './parser/parser.service';
+import { ParserModule } from './parser/parser.module';
+import { PagesModule } from './pages/pages.module';
+import { ChapterModule } from './chapter/chapter.module';
 
 
 @Module({
@@ -20,8 +25,10 @@ import { AppService } from './app.service';
       autoLoadEntities: true,
       synchronize: true, 
     }),
-    UserModule,MangaModule,
+    UserModule,MangaModule, ParserModule, PagesModule, ChapterModule, 
   ],
+  controllers: [ParserController],
+  providers: [ParserService],
 })
 
 export class AppModule {

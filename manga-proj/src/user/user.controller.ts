@@ -12,9 +12,9 @@ export class UserController {
     findAll(){
         return this.userService.findAll()
     }
-    @Get()
-    findMangas(){
-        
+    @Get('/mangas')
+    findMangas(@Body() dto:{id:number}){
+        return this.userService.findMangas(dto)
     }
 
     @Post()
