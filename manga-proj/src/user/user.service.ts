@@ -37,26 +37,14 @@ export class UserService {
         await this.usersRepository.delete(id); 
       }
 
-      async linkToManga(dto:IlinkMangaToUser){
-        const manga:Manga[] = await this.mangaRepository.find({where:{id:dto.mangaId}})
-        const user = await this.usersRepository.findOne({
-          where:{id:dto.userId},
-          relations: ['mangas']
-        })
-        user.mangas.concat(manga)
-        return this.usersRepository.save(user)
-      } 
+      
       async getManga(dto:{id:number}){
         return await this.mangaRepository.find({where:{id:dto.id}})
       }
 
-      async findMangas(dto:{id:number}){  
-        const qwe:User[] = await this.usersRepository.find({relations: ['mangas'],where:{id:dto.id}},);
-        qwe.map((user)=>{
-          console.log(user.mangas)
-        })
+      
 
-        return qwe;
-      }
+  
+    
       
 }

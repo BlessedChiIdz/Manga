@@ -2,7 +2,6 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Post, UseGuards } from '@n
 import { AuthService } from './auth.service';
 import { getProfileByIdDto, signInDto } from './dto/auth.dto';
 import { jwtConstants } from '../constants/jwt.constants';
-import { AuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -16,6 +15,6 @@ export class AuthController {
 
     @Get('/profile')
     getProfile(@Body() dto:getProfileByIdDto){
-      return this.authService.getProfile(dto) 
+      return this.authService.getProfile(dto);
     }
 }

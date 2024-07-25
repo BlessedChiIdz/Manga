@@ -12,10 +12,7 @@ export class Manga {
     @Column()
     name:string
 
-    @ManyToMany(() => User, user => user.mangas)
-    user: User
-    
-    @OneToMany(()=>Chapter,chapter=>chapter.manga) 
+    @OneToMany(()=>Chapter,chapter=>chapter.manga)  
     @JoinColumn()
     chapter:Chapter[]
 }

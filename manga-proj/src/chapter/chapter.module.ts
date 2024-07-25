@@ -8,6 +8,7 @@ import { Manga } from 'src/manga/manga.entity';
 @Module({
   imports:[TypeOrmModule.forFeature([Chapter,Manga])],
   providers: [ChapterService],
-  controllers: [ChapterController]
+  controllers: [ChapterController],
+  
 })
 export class ChapterModule {}

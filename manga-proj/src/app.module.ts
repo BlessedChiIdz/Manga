@@ -7,6 +7,7 @@ import { ChapterModule } from './chapter/chapter.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
+import { FavoriteModule } from './favorite/favorite.module';
 
 
 @Module({
@@ -24,7 +25,7 @@ import { Module } from '@nestjs/common';
       autoLoadEntities: true,
       synchronize: true, 
     }),
-    UserModule,MangaModule, ParserModule, PagesModule, ChapterModule, AuthModule,
+    UserModule,MangaModule, ParserModule, PagesModule, ChapterModule, AuthModule, FavoriteModule,
   ],
 })
 
