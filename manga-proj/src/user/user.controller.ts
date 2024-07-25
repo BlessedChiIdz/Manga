@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, SetMetadata, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import { IlinkMangaToUser } from './dto/dto';
@@ -12,12 +12,18 @@ export class UserController {
     findAll(){
         return this.userService.findAll()
     }
+    @Get('/id')
+    getOneById(@Body() dto:{id:number}){
+        SetMetadata('role','Admin')
+        return this.userService.findOneById(dto.id)
+    }
+
     @Get('/mangas')
     findMangas(@Body() dto:{id:number}){
         return this.userService.findMangas(dto)
     }
 
-    @Post()
+    @Post() 
     create(@Body() user:User){
         return this.userService.create(user)
     }

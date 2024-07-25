@@ -15,6 +15,15 @@ export class UserService {
         private mangaRepository: Repository<Manga>,
       ) {}
     
+
+      findOneById(id:number):Promise<User>{
+        return this.usersRepository.findOne({where: {id: id}})
+      }
+
+      findOneByName(name:string):Promise<User>{
+        return this.usersRepository.findOne({where:{name: name}})
+      }
+
       findAll(): Promise<User[]> {
         return this.usersRepository.find();
       }

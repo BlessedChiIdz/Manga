@@ -4,6 +4,8 @@ import { Pages } from './pages.entity';
 import { Repository } from 'typeorm';
 import { Chapter } from 'src/chapter/chapter.entity';
 import { createPagesDto } from './dto/create-pages.dto';
+import { createReadStream } from 'fs';
+import { join } from 'path';
 
 @Injectable()
 export class PagesService {
@@ -29,4 +31,6 @@ export class PagesService {
         const pages:Pages[] = await this.pagesRepository.find({relations:['chapter']})
         return pages
     }
+
+    
 }

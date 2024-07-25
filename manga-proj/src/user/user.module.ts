@@ -10,5 +10,6 @@ import { Manga } from 'src/manga/manga.entity';
   imports: [TypeOrmModule.forFeature([User,Manga])],
   providers: [UserService],
   controllers: [UserController],
+  exports:[UserService]
 })
 export class UserModule {}

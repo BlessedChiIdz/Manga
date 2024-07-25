@@ -1,20 +1,19 @@
-import { Controller, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserController } from './user/user.controller';
-import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
 import { MangaModule } from './manga/manga.module';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ParserController } from './parser/parser.controller';
-import { ParserService } from './parser/parser.service';
 import { ParserModule } from './parser/parser.module';
 import { PagesModule } from './pages/pages.module';
 import { ChapterModule } from './chapter/chapter.module';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+import { Module } from '@nestjs/common';
 
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: `.${process.env.NODE_ENV}.env`
+   }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -25,10 +24,8 @@ import { ChapterModule } from './chapter/chapter.module';
       autoLoadEntities: true,
       synchronize: true, 
     }),
-    UserModule,MangaModule, ParserModule, PagesModule, ChapterModule, 
+    UserModule,MangaModule, ParserModule, PagesModule, ChapterModule, AuthModule,
   ],
-  controllers: [ParserController],
-  providers: [ParserService],
 })
 
 export class AppModule {

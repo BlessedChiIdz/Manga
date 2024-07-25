@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, StreamableFile } from '@nestjs/common';
 import { PagesService } from './pages.service';
 import { createPagesDto } from './dto/create-pages.dto';
+import { createReadStream } from 'fs';
+import { join } from 'path';
 
 @Controller('pages')
 export class PagesController {
@@ -21,5 +23,11 @@ export class PagesController {
     @Get('/test')
     test(){
         return this.pagesService.test()
+    }
+
+    @Get('/img')
+    returnImg(){
+        const img = createReadStream(join(process.cwd(),'./imgs/screenshot-1.png'));
+        return new StreamableFile(img);
     }
 }
