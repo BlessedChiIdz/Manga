@@ -14,7 +14,7 @@ export class AuthService {
     async signIn(username: string, pass: string): Promise<{ access_tocken:string }> {
         const user = await this.usersService.findOneByName(username)
         if (user?.password !== pass) {
-          throw new UnauthorizedException();
+          throw new UnauthorizedException("Wrong Password");
         }
         const payload = {sub: user.id, userName:user.name}
         return {

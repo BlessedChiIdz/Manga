@@ -20,7 +20,7 @@ export class Migration1721983076234 implements MigrationInterface {
             }),
             true,
         )
-        await queryRunner.query(`insert into "user" values (1,'WANE','Admin','zxc@zxc','qweqwe');`)
+        await queryRunner.query(`insert into "user" values (1,'WANE','Admin','zxc@zxc','qweqwe');`) 
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

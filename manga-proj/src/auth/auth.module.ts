@@ -20,10 +20,9 @@ require('dotenv').config();
       signOptions:{
         expiresIn:'24h'
       }
-    })
+    }),
   ],
   controllers: [AuthController], 
   providers: [AuthService],
-  //exports: [AuthService]
 })
 export class AuthModule {}

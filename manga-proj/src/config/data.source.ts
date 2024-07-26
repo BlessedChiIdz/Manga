@@ -16,4 +16,4 @@ export const dbdatasource: DataSourceOptions = {
     
 };
 const dataSource = new DataSource(dbdatasource)
-export default dataSource  
+export default dataSource

@@ -5,11 +5,18 @@ import { User } from './user.entity';
 import { UserController } from './user.controller';
 import { Manga } from 'src/manga/manga.entity';
 import { Favorite } from 'src/favorite/favorite.entity';
+import { AuthModule } from 'src/auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User,Manga,Favorite])],
-  providers: [UserService],
+  imports: [TypeOrmModule.forFeature([User,Manga,Favorite]),JwtModule],
+  providers: [UserService,
+    // {
+    //   provide: "AUTH_GUARD",
+    //   useClass: AuthGuard,
+    // }
+  ],
   controllers: [UserController],
   exports:[UserService]
 })
