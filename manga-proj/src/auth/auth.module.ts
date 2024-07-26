@@ -8,6 +8,9 @@ import { jwtConstants } from '../constants/jwt.constants';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
+require('dotenv').config();
+
+
 
 @Module({
   imports: [UserModule,
@@ -21,6 +24,6 @@ import { AuthGuard } from './auth.guard';
   ],
   controllers: [AuthController], 
   providers: [AuthService],
-  exports: [AuthService]
+  //exports: [AuthService]
 })
 export class AuthModule {}

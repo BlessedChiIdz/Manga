@@ -9,6 +9,7 @@ import { Module } from '@nestjs/common';
 import { FavoriteModule } from './favorite/favorite.module';
 import { ConfigModule } from '@nestjs/config';
 import { dbdatasource } from './config/data.source';
+import { PostModule } from './post/post.module';
 @Module({
   imports: [
   //   ConfigModule.forRoot({
@@ -16,7 +17,7 @@ import { dbdatasource } from './config/data.source';
   //     isGlobal:true 
   //  }),
    TypeOrmModule.forRoot(dbdatasource), 
-   UserModule,MangaModule, ParserModule, PagesModule, ChapterModule, AuthModule, FavoriteModule,
+   UserModule,MangaModule, ParserModule, PagesModule, ChapterModule, AuthModule, FavoriteModule, PostModule,
   ],
 }) 
 
