@@ -9,12 +9,10 @@ import { Module } from '@nestjs/common';
 import { FavoriteModule } from './favorite/favorite.module';
 import { ConfigModule } from '@nestjs/config';
 import { dbdatasource } from './config/data.source';
-require('dotenv').config();
-
 @Module({
   imports: [
   //   ConfigModule.forRoot({
-  //     envFilePath: '.env',
+  //     envFilePath: '.env',   //для env dotenv
   //     isGlobal:true 
   //  }),     
    TypeOrmModule.forRoot(dbdatasource), 
