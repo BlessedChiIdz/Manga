@@ -14,7 +14,7 @@ import { dbdatasource } from './config/data.source';
   //   ConfigModule.forRoot({
   //     envFilePath: '.env',   //для env dotenv
   //     isGlobal:true 
-  //  }),     
+  //  }),
    TypeOrmModule.forRoot(dbdatasource), 
    UserModule,MangaModule, ParserModule, PagesModule, ChapterModule, AuthModule, FavoriteModule,
   ],

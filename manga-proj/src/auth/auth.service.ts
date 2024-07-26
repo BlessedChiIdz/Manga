@@ -23,7 +23,7 @@ export class AuthService {
       }
 
     async getProfile(dto:getProfileByIdDto){
-      const user = await this.usersService.findOneById(dto.id)
+      const user = await this.usersService.findOneById(dto.id) 
       return user
     }
 }
