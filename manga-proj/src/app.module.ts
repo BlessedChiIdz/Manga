@@ -5,30 +5,23 @@ import { ParserModule } from './parser/parser.module';
 import { PagesModule } from './pages/pages.module';
 import { ChapterModule } from './chapter/chapter.module';
 import { AuthModule } from './auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { FavoriteModule } from './favorite/favorite.module';
-
+import { ConfigModule } from '@nestjs/config';
+import { dbdatasource } from './config/data.source';
+require('dotenv').config();
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: `.${process.env.NODE_ENV}.env`
-   }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5555,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'Test',
-      autoLoadEntities: true,
-      synchronize: true, 
-    }),
-    UserModule,MangaModule, ParserModule, PagesModule, ChapterModule, AuthModule, FavoriteModule,
+  //   ConfigModule.forRoot({
+  //     envFilePath: '.env',
+  //     isGlobal:true 
+  //  }),     
+   TypeOrmModule.forRoot(dbdatasource), 
+   UserModule,MangaModule, ParserModule, PagesModule, ChapterModule, AuthModule, FavoriteModule,
   ],
-})
+}) 
 
 export class AppModule {
-
+  
 }

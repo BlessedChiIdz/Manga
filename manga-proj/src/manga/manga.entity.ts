@@ -12,6 +12,9 @@ export class Manga {
     @Column()
     name:string
 
+    @Column() 
+    tag:string
+
     @OneToMany(()=>Chapter,chapter=>chapter.manga)  
     @JoinColumn()
     chapter:Chapter[]
