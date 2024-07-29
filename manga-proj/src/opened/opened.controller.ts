@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { OpenedService } from './opened.service';
 import { createOpenedDto } from './dto/create.dto';
+import { retry } from 'rxjs';
 
 @Controller('opened')
 export class OpenedController {
@@ -14,5 +15,10 @@ export class OpenedController {
     @Get()
     returnAll(){
         return this.openedService.get()
+    }
+
+    @Get('user/:id')
+    returnByUser(@Param('id') id:number){
+        return this.openedService.getByUserId(id)
     }
 }

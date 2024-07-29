@@ -33,4 +33,9 @@ export class OpenedService {
     async get(){
         return this.openedRepository.find({where:{id:1}})
     }
+
+    async getByUserId(userId:number){
+        const user = await this.userRepository.findOne({where:{id:userId}})
+        return this.openedRepository.find({where:{user:user}, relations:['manga','user']})
+    }
 }
