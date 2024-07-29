@@ -1,28 +1,26 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UserModule } from 'src/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from '../constants/jwt.constants';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { jwtConstants } from '../../constants/jwt.constants';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from './auth.guard';
-require('dotenv').config();
+import { LoggerMiddleware } from './logger.middleware';
 
 
 
 @Module({
   imports: [UserModule,
     ConfigModule,
-    JwtModule.register({
-      secret:process.env.PRIVATE_KEY || 'Secret', //-------------------------------debelizm, vsegda ne env beretsya
-      signOptions:{
-        expiresIn:'24h'
-      }
-    }),
   ],
-  controllers: [AuthController], 
+  controllers: [AuthController],  
   providers: [AuthService],
 })
-export class AuthModule {}
+export class AuthModule implements NestModule{
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+    .apply(LoggerMiddleware)
+    .forRoutes('auth')
+  }
+ }

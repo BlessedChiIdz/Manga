@@ -11,6 +11,8 @@ import { ConfigModule } from '@nestjs/config';
 import { dbdatasource } from './config/data.source';
 import { PostModule } from './post/post.module';
 import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from 'constants/jwt.constants';
+import { OpenedModule } from './opened/opened.module';
 require('dotenv').config();
 
 @Module({
@@ -22,11 +24,13 @@ require('dotenv').config();
    TypeOrmModule.forRoot(dbdatasource), 
    UserModule,MangaModule, ParserModule, PagesModule, ChapterModule, AuthModule, FavoriteModule, PostModule,
    JwtModule.register({
-      secret:process.env.PRIVATE_KEY || 'Secret', //-------------------------------debelizm, vsegda ne env beretsya
+      global: true,
+      secret:jwtConstants.secret || 'Secret', //-------------------------------debelizm, vsegda ne env beretsya
       signOptions:{
         expiresIn:'24h'
       }
     }),
+   OpenedModule,
 
   ],
 }) 

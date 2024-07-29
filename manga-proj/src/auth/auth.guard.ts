@@ -2,8 +2,9 @@ import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
-import { jwtConstants } from 'src/constants/jwt.constants';
+import { jwtConstants } from 'constants/jwt.constants';
 require('dotenv').config();
+
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
@@ -14,7 +15,6 @@ export class AuthGuard implements CanActivate {
     if (!token) {
       throw new UnauthorizedException();
     }
-    console.log(jwtConstants.secret)
     try {
       const payload = await this.jwtService.verifyAsync(
         token,

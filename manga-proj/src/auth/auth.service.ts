@@ -14,10 +14,10 @@ export class AuthService {
     async signIn(username: string, pass: string): Promise<{ access_tocken:string }> {
         const user = await this.usersService.findOneByName(username)
         if (user?.password !== pass) {
-          throw new UnauthorizedException("Wrong Password");
+          throw new UnauthorizedException("Wrong Password"); 
         }
         const payload = {sub: user.id, userName:user.name}
-        return {
+        return { 
             access_tocken: await this.jwtService.signAsync(payload)
         }; 
       }
@@ -25,5 +25,5 @@ export class AuthService {
     async getProfile(dto:getProfileByIdDto){
       const user = await this.usersService.findOneById(dto.id) 
       return user
-    }
+    } 
 }

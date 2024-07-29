@@ -1,4 +1,5 @@
 import { Chapter } from "src/chapter/chapter.entity";
+import { Opened } from "src/opened/opened.entity";
 import { Pages } from "src/pages/pages.entity";
 import { User } from "src/user/user.entity";
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -18,4 +19,7 @@ export class Manga {
     @OneToMany(()=>Chapter,chapter=>chapter.manga)  
     @JoinColumn()
     chapter:Chapter[]
+
+    @OneToMany(()=>Opened,opened=>opened.manga)
+    opened:Opened[]
 }

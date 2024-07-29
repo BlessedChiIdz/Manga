@@ -16,8 +16,6 @@ export class UserController {
 
     
     @Get('/id')
-    @UseGuards(AuthGuard)
-
     getOneById(@Body() dto:{id:number}){
         SetMetadata('role','Admin')
         return this.userService.findOneById(dto.id)
