@@ -30,5 +30,5 @@ export class Manga {
     tags:Tags[]
 
     @ManyToMany(()=>UserComment,comment=>comment.manga)
-    comment:UserComment[]
+    comment: UserComment[]
 }

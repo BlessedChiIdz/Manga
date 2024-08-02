@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/user/user.entity';
 import { data } from 'cheerio/lib/api/attributes';
+import { Manga } from 'src/manga/manga.entity';
 
 @Injectable()
 export class PostService {
@@ -12,18 +13,27 @@ export class PostService {
     @InjectRepository(UserComment)
     private postRepository: Repository<UserComment>,
     @InjectRepository(User)
-    private userRepository: Repository<User>
+    private userRepository: Repository<User>,
+    @InjectRepository(Manga)
+    private mangaRepository: Repository<Manga>
   ){}
+
+
   async postDataNoParents(dto:createUserCommentDto){
     const user = await this.userRepository.findOne({
       where:{
         id: dto.userId
       },
-      
+    })
+    const manga = await this.mangaRepository.findOne({
+      where:{
+        id:dto.mangaId
+      }
     })
     const dataToSave:UserComment = new UserComment()
     dataToSave.text = dto.text;
     dataToSave.title = dto.title;
+    dataToSave.manga.push(manga)
     if(dataToSave.user == undefined){
       dataToSave.user = [user]
     }
@@ -56,4 +66,6 @@ export class PostService {
     }
     return this.postRepository.save(dataToSave)
   }
+
+  
 }
