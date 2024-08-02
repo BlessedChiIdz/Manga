@@ -1,4 +1,4 @@
-export interface IlinkMangaToUser{
+export interface linkMangaToUserDto{
     mangaId:number;
     userId:number;
 }

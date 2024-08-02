@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { Manga } from 'src/manga/manga.entity';
-import { IlinkMangaToUser } from './dto/dto';
+import { linkMangaToUserDto } from './dto/dto';
 
 
 @Injectable()

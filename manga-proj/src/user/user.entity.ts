@@ -1,8 +1,8 @@
 import { Favorite } from "src/favorite/favorite.entity";
-import { Manga } from "src/manga/manga.entity";
 import { Opened } from "src/opened/opened.entity";
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { roleEnum } from "./enum/role.enum";
+import { UserComment } from "src/post/entities/post.entity";
 
 
 @Entity()
@@ -27,4 +27,7 @@ export class User {
 
     @OneToMany(()=>Opened,opened => opened.user)
     opened:Opened[]
+
+    @ManyToMany(()=>UserComment,comment=>comment.user)
+    comments:UserComment[]
 } 

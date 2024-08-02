@@ -4,9 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Manga } from './manga.entity';
 import { MangaService } from './manga.service';
 import { Chapter } from 'src/chapter/chapter.entity';
+import { UserComment } from 'src/post/entities/post.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Manga,Chapter])],
+  imports:[TypeOrmModule.forFeature([Manga,Chapter,UserComment])],
   controllers: [MangaController],
   providers: [MangaService],
 })

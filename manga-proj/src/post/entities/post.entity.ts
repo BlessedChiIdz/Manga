@@ -1,17 +1,31 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Manga } from "src/manga/manga.entity";
+import { User } from "src/user/user.entity";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
   @Entity()
-  export class Post {
+  export class UserComment {
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
   
     @Column()
-    title: string;
-  
+    title: string
+
     @Column()
-    content: string;
-  
-    @Column()
-    status: string;
+    text: string
+
+    @ManyToMany(()=>User,user=>user.comments)
+    @JoinTable()
+    user?: User[]
+
+    @ManyToMany(()=>Manga,manga=>manga.comment)
+    @JoinTable()
+    manga: Manga[]
+
+    @OneToMany(()=>UserComment,comment=>comment.parentId)
+    childIds?: number[]
+
+    @ManyToOne(()=>UserComment,commend=>commend.childIds)
+    @JoinColumn()
+    parentId?: number
   }

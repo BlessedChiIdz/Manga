@@ -21,7 +21,7 @@ export class AuthController {
 
     @Get('/profile') 
     @Roles(['Admin'])
-    @UseGuards(RoleGuard) 
+    @UseGuards(AuthGuard)
     getProfile(@Body() dto:getProfileByIdDto){
       return this.authService.getProfile(dto);
     }

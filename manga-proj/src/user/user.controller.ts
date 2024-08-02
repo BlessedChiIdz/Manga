@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, SetMetadata, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './user.entity';
-import { IlinkMangaToUser } from './dto/dto';
+import { linkMangaToUserDto } from './dto/dto';
 import { AuthGuard } from 'src/guard/auth.guard';
 
 

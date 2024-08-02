@@ -1,28 +1,59 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { CreatePostDto } from './dto/create-post.dto';
-import { Post } from './entities/post.entity';
+import { createUserCommentDto, createUserCommentWithParentDto } from './dto/create-user-comment.dto';
+import { UserComment } from './entities/post.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { User } from 'src/user/user.entity';
+import { data } from 'cheerio/lib/api/attributes';
 
 @Injectable()
 export class PostService {
   constructor(
-    @InjectRepository(Post)
-    private postRepository: Repository<Post>,
+    @InjectRepository(UserComment)
+    private postRepository: Repository<UserComment>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>
   ){}
-  async postData(): Promise<void>{
-    const postData: Partial<Post>[] = [
-      { title: 'Post 1', content: 'Content for Post 1', status: "zxc" },
-      { title: 'Post 2', content: 'Content for Post 2', status: "zxc" },
-      { title: 'Post 3', content: 'Content for Post 3', status: "zxc" },
-      { title: 'Post 4', content: 'Content for Post 4', status: "zxc" },
-    ];
-
-    try {
-      await this.postRepository.save(postData);
-      Logger.log('Data seeded successfully');
-    } catch (error) {
-      Logger.error(`Error seeding data: ${error.message}`, error.stack);
+  async postDataNoParents(dto:createUserCommentDto){
+    const user = await this.userRepository.findOne({
+      where:{
+        id: dto.userId
+      },
+      
+    })
+    const dataToSave:UserComment = new UserComment()
+    dataToSave.text = dto.text;
+    dataToSave.title = dto.title;
+    if(dataToSave.user == undefined){
+      dataToSave.user = [user]
     }
+    else{
+      dataToSave.user.push(user)
+    }
+    return this.postRepository.save(dataToSave)
+  }
+
+  async postDataWithParents(dto:createUserCommentWithParentDto){
+    const user = await this.userRepository.findOne({
+      where:{
+        id: dto.userId
+      },
+    })
+    const parent = await this.userRepository.findOne({
+      where:{
+        id:dto.parentId
+      }
+    })
+    const dataToSave:UserComment = new UserComment()
+    dataToSave.text = dto.text;
+    dataToSave.title = dto.title;
+    dataToSave.parentId = dto.parentId
+    if(dataToSave.user == undefined){
+      dataToSave.user = [user]
+    }
+    else{
+      dataToSave.user.push(user)
+    }
+    return this.postRepository.save(dataToSave)
   }
 }
