@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, SetMetadata, UseGuards } from '@nestjs/com
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import { IlinkMangaToUser } from './dto/dto';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from 'src/guard/auth.guard';
 
 
 @Controller('user')
@@ -16,6 +16,7 @@ export class UserController {
 
     
     @Get('/id')
+    @UseGuards(AuthGuard)
     getOneById(@Body() dto:{id:number}){
         SetMetadata('role','Admin')
         return this.userService.findOneById(dto.id)

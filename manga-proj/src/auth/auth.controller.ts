@@ -1,9 +1,11 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, SetMetadata, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { getProfileByIdDto, signInDto } from './dto/auth.dto';
 import { jwtConstants } from '../../constants/jwt.constants';
-import { AuthGuard } from './auth.guard';
-import { LoggingInterceptor } from './Interceptor.login';
+import { AuthGuard } from '../guard/auth.guard';
+import { LoggingInterceptor } from '../interceptor/Interceptor.login';
+import { Roles } from 'src/decorator/roles.decorator';
+import { RoleGuard } from 'src/guard/role.guard';
 
 
 @UseInterceptors(LoggingInterceptor)
@@ -18,7 +20,8 @@ export class AuthController {
   }
 
     @Get('/profile') 
-    @UseGuards(AuthGuard) 
+    @Roles(['Admin'])
+    @UseGuards(RoleGuard) 
     getProfile(@Body() dto:getProfileByIdDto){
       return this.authService.getProfile(dto);
     }

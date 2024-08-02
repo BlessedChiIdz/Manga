@@ -8,7 +8,7 @@ import { Chapter } from 'src/chapter/chapter.entity';
 import { Favorite } from './favorite.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User,Manga,Chapter,Favorite])],
+  imports: [TypeOrmModule.forFeature([User,Manga,User,Favorite])],
   providers: [FavoriteService],
   controllers: [FavoriteController]
 }) 

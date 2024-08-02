@@ -2,6 +2,7 @@ import { Favorite } from "src/favorite/favorite.entity";
 import { Manga } from "src/manga/manga.entity";
 import { Opened } from "src/opened/opened.entity";
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { roleEnum } from "./enum/role.enum";
 
 
 @Entity()
@@ -13,17 +14,15 @@ export class User {
     name: string
 
     @Column()
-    Role:string
-
+    Role:roleEnum
 
     @Column()
     mail:string
 
-    @Column() 
-    password:string 
+    @Column()  
+    password:string
 
-    @ManyToMany(()=>Favorite)
-    @JoinTable()
+    @OneToMany(()=>Favorite,favorite=>favorite.user) 
     favorite:Favorite[]
 
     @OneToMany(()=>Opened,opened => opened.user)

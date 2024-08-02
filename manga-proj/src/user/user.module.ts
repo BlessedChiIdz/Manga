@@ -12,10 +12,7 @@ import { JwtModule } from '@nestjs/jwt';
 @Module({
   imports: [TypeOrmModule.forFeature([User,Manga,Favorite]),JwtModule],
   providers: [UserService,
-    // {
-    //   provide: "AUTH_GUARD",
-    //   useClass: AuthGuard,
-    // }
+    
   ],
   controllers: [UserController],
   exports:[UserService]

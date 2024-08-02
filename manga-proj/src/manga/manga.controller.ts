@@ -1,14 +1,14 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { MangaService } from './manga.service';
-import { Manga } from './manga.entity';
+
 
 @Controller('manga')
 export class MangaController {
-    constructor(private readonly userService : MangaService){}
+    constructor(private readonly mangaService:MangaService){}
 
 
-    @Post()
-    Create(@Body() manga:Manga){
-        return this.userService.create(manga) 
+    @Get()
+    getMangaById(@Body() dto:{id:number}){
+        return this.mangaService.getMangaById(dto.id)
     }
 }

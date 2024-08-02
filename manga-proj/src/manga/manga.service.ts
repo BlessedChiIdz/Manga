@@ -9,17 +9,12 @@ export class MangaService {
 
     constructor(
         @InjectRepository(Manga)
-        private usersRepository: Repository<Manga>,
-        @InjectRepository(Chapter)
-        private chapterRepository: Repository<Chapter>
+        private mangaRepository:Repository<Manga>
       ) {}
-    
-      create(manga:Manga){
-       return this.usersRepository.save(manga)
-      }
+  
 
-      addChapter(){
-        
+      getMangaById(id:number){
+        return this.mangaRepository.find({where:{id:id}, relations:["tags","chapters"]})
       }
 
 }

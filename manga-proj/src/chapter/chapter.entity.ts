@@ -14,7 +14,7 @@ export class Chapter{
     @Column()
     chapterName:string 
 
-    @ManyToOne(()=>Manga,manga=>manga.chapter)
+    @ManyToOne(()=>Manga,manga=>manga.chapters)
     @JoinColumn()
     manga:Manga
 

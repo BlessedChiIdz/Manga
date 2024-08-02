@@ -13,6 +13,8 @@ import { PostModule } from './post/post.module';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from 'constants/jwt.constants';
 import { OpenedModule } from './opened/opened.module';
+import { TagsModule } from './tags/tags.module';
+import { DevtoolsModule } from '@nestjs/devtools-integration';
 require('dotenv').config();
 
 @Module({
@@ -31,6 +33,7 @@ require('dotenv').config();
       }
     }),
    OpenedModule,
+   TagsModule,
 
   ],
 }) 

@@ -12,9 +12,9 @@ export class Opened {
     @ManyToOne(()=>User,(user)=>user.opened)
     user:User
 
-    @ManyToOne(()=>Manga,(manga)=>manga.opened)
+    @ManyToOne(()=>Manga,(manga)=>manga.opened) 
     manga:Manga
 
     @Column("int", { array: true })
-    openedChapters:number[]
+    openedChapters:number[] 
 }

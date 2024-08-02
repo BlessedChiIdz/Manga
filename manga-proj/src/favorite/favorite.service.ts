@@ -3,8 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Favorite } from './favorite.entity';
 import { Repository } from 'typeorm';
 import { Manga } from 'src/manga/manga.entity';
-import { Chapter } from 'src/chapter/chapter.entity';
-import { addMangaToFavorite } from './dto/addMangaToFavorite';
+import { Opened } from 'src/opened/opened.entity';
+import { User } from 'src/user/user.entity';
+import { createFavoriteDto } from './dto/createFavoriteDto';
 
 @Injectable()
 export class FavoriteService {
@@ -15,12 +16,29 @@ export class FavoriteService {
         @InjectRepository(Manga)
         private mangaRepository: Repository<Manga>,
 
-        @InjectRepository(Chapter)
-        private chapterRepository: Repository<Chapter>
+        @InjectRepository(User)
+        private userRepository:Repository<User>
     ){}
 
-    async addManga(dto:addMangaToFavorite){
-        
+    async create(dto:createFavoriteDto){
+        const manga = await this.mangaRepository.findOne({where:{id:dto.mangaId}})
+        const user = await this.userRepository.findOne({where:{id:dto.userId}})
+        let data:Opened = {
+            manga: manga,
+            user: user,
+            openedChapters: dto.chapters
+        };
+        console.log(data)
+        return this.favoriteRepository.save(data)
+    }
+
+    async get(){
+        return this.favoriteRepository.find({where:{id:1}})
+    }
+
+    async getByUserId(userId:number){
+        const user = await this.userRepository.findOne({where:{id:userId}})
+        return this.favoriteRepository.find({where:{user:user}, relations:['manga','user']})
     }
 
 }
