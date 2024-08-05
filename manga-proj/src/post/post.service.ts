@@ -49,6 +49,11 @@ export class PostService {
         id: dto.userId
       },
     })
+    const manga = await this.mangaRepository.findOne({
+      where:{
+        id:dto.mangaId
+      }
+    })
     const parent = await this.userRepository.findOne({
       where:{
         id:dto.parentId
@@ -58,13 +63,13 @@ export class PostService {
     dataToSave.text = dto.text;
     dataToSave.title = dto.title;
     dataToSave.parentId = dto.parentId
-    if(dataToSave.user == undefined){
-      dataToSave.user = [user]
-    }
-    else{
-      dataToSave.user.push(user)
-    }
+    dataToSave.user = [user]
+    dataToSave.manga = [manga]
     return this.postRepository.save(dataToSave)
+  }
+
+  async testMethod(dto:createUserCommentDto){
+     
   }
 
   

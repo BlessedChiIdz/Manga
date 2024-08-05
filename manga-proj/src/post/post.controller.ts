@@ -1,6 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { PostService } from './post.service';
 import { createUserCommentDto, createUserCommentWithParentDto } from './dto/create-user-comment.dto';
+import { RoleGuard } from 'src/guard/role.guard';
+import { Roles } from 'src/decorator/roles.decorator';
 
 @Controller('post')
 export class PostController {
@@ -11,6 +13,8 @@ export class PostController {
     return this.postService.postDataNoParents(dto)
   }
   @Post('/createP')
+  @Roles(['Admin'])
+  @UseGuards(RoleGuard) 
   createuserCommentWithParent(@Body() dto:createUserCommentWithParentDto){
     return this.postService.postDataWithParents(dto)
   }
