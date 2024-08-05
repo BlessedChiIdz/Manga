@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Parser } from "./parser.entity";
 import { Repository } from "typeorm";
+import { delay } from "rxjs";
 
 const puppeteer = require("puppeteer");
 const fs = require("fs");
@@ -18,12 +19,11 @@ export class ParserService {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto("https://remanga.org/manga/one_piece/21390?page=1");
-
+    await delay(1000);
     // Wait for images or elements to load
     await page.waitForSelector('img, div[style*="padding-top: 147.059%;"]'); // Adjust selector based on your needs
-
     // Select elements you want to screenshot
-    const elements = await page.$$('img, div[style*="padding-top: 147.059%;"]'); // Adjust selector based on your needs
+    const elements = await page.$$('img'); // Adjust selector based on your needs
 
     // Create a directory to save the screenshots
     const dir = "./screenshots";
