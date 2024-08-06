@@ -21,7 +21,7 @@ export class TagsService {
         return this.tagsReposiroty.save(dto)
     }
 
-    async getTagById(ids:number[]){
+    async getTagByIds(ids:number[]){
         return this.tagsReposiroty.find({where:{id:In(ids)}})
     }
 

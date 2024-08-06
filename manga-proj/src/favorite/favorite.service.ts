@@ -3,9 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Favorite } from './favorite.entity';
 import { Repository } from 'typeorm';
 import { Manga } from 'src/manga/manga.entity';
-import { Opened } from 'src/opened/opened.entity';
 import { User } from 'src/user/user.entity';
 import { createFavoriteDto } from './dto/createFavoriteDto';
+import { OpenedManga } from 'src/opened/opened.manga.entity';
 
 @Injectable()
 export class FavoriteService {
@@ -23,7 +23,7 @@ export class FavoriteService {
     async create(dto:createFavoriteDto){
         const manga = await this.mangaRepository.findOne({where:{id:dto.mangaId}})
         const user = await this.userRepository.findOne({where:{id:dto.userId}})
-        let data:Opened = {
+        let data:OpenedManga = {
             manga: manga,
             user: user,
             openedChapters: dto.chapters

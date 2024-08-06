@@ -17,4 +17,8 @@ export class MangaService {
         return this.mangaRepository.find({where:{id:id}, relations:["tags","chapters"]})
       }
 
+      getAllMangaMainPage(){
+        return this.mangaRepository.find({relations:["tags"]})
+      }
+
 }

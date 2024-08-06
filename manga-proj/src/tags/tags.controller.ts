@@ -17,7 +17,7 @@ export class TagsController {
 
     @Get()
     getTagsByid(@Body() dto:{ids:number[]}){
-        return this.tagsService.getTagById(dto.ids)
+        return this.tagsService.getTagByIds(dto.ids)
     }
 
     @Post('/link')

@@ -16,13 +16,8 @@ export class PagesController {
     }
 
     @Get()
-    get(){
-        return this.pagesService.get()
-    }
-
-    @Get('/test')
-    test(){
-        return this.pagesService.test()
+    getAll(){
+        return this.pagesService.getAll()
     }
 
     @Get('/img')

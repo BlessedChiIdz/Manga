@@ -11,8 +11,6 @@ export class UserService {
     constructor(
         @InjectRepository(User)
         private usersRepository: Repository<User>,
-        @InjectRepository(Manga)
-        private mangaRepository: Repository<Manga>,
       ) {}
     
 
@@ -35,16 +33,5 @@ export class UserService {
     
       async remove(id: number): Promise<void> {
         await this.usersRepository.delete(id); 
-      }
-
-      
-      async getManga(dto:{id:number}){
-        return await this.mangaRepository.find({where:{id:dto.id}})
-      }
-
-      
-
-  
-    
-      
+      }   
 }

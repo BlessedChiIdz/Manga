@@ -1,6 +1,6 @@
 import { Manga } from "src/manga/manga.entity";
 import { User } from "src/user/user.entity";
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
   @Entity()
@@ -28,4 +28,7 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany
     @ManyToOne(()=>UserComment,commend=>commend.childIds)
     @JoinColumn()
     parentId?: number
+
+    @CreateDateColumn()
+    created_at:Date;
   }

@@ -3,6 +3,7 @@ import { PostService } from './post.service';
 import { createUserCommentDto, createUserCommentWithParentDto } from './dto/create-user-comment.dto';
 import { RoleGuard } from 'src/guard/role.guard';
 import { Roles } from 'src/decorator/roles.decorator';
+import { dot } from 'node:test/reporters';
 
 @Controller('post')
 export class PostController {
@@ -17,6 +18,12 @@ export class PostController {
   @UseGuards(RoleGuard) 
   createuserCommentWithParent(@Body() dto:createUserCommentWithParentDto){
     return this.postService.postDataWithParents(dto)
+  }
+
+  @Post('/delete')
+  @Roles(['Admin'])
+  deleteCommentById(@Body() dto:{id:number}){
+    return this.postService.DeleteCommentById(dto.id)
   }
   
 }

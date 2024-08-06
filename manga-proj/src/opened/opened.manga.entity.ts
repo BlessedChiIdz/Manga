@@ -5,7 +5,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 
 
 @Entity()
-export class Opened {
+export class OpenedManga {
     @PrimaryGeneratedColumn()
     id?:number
 

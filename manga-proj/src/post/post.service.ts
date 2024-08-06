@@ -68,9 +68,8 @@ export class PostService {
     return this.postRepository.save(dataToSave)
   }
 
-  async testMethod(dto:createUserCommentDto){
-     
-  }
 
-  
+  async DeleteCommentById(id:number){
+    return this.postRepository.delete(id)
+  }
 }

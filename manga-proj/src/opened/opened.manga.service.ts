@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Opened } from './opened.entity';
+import { OpenedManga } from './opened.manga.entity';
 import { Repository } from 'typeorm';
 import { createOpenedDto } from './dto/create.dto';
 import { Manga } from 'src/manga/manga.entity';
@@ -9,8 +9,8 @@ import { User } from 'src/user/user.entity';
 @Injectable()
 export class OpenedService {
     constructor(
-        @InjectRepository(Opened)
-        private openedRepository:Repository<Opened>,
+        @InjectRepository(OpenedManga)
+        private openedRepository:Repository<OpenedManga>,
         @InjectRepository(Manga)
         private mangaRepository:Repository<Manga>,
         @InjectRepository(User)
@@ -21,7 +21,7 @@ export class OpenedService {
     async create(dto:createOpenedDto){
         const manga = await this.mangaRepository.findOne({where:{id:dto.mangaId}})
         const user = await this.userRepository.findOne({where:{id:dto.userId}})
-        let data:Opened = {
+        let data:OpenedManga = {
             manga: manga,
             user: user,
             openedChapters: dto.chapters

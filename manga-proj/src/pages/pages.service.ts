@@ -23,14 +23,10 @@ export class PagesService {
         return pages
     }
 
-    async get(){
+    async getAll(){
         return this.pagesRepository.find({relations:['chapter']})
     }
 
-    async test(){
-        const pages:Pages[] = await this.pagesRepository.find({relations:['chapter']})
-        return pages
-    }
 
     
 }

@@ -1,6 +1,6 @@
 import { Chapter } from "src/chapter/chapter.entity";
 import { Favorite } from "src/favorite/favorite.entity";
-import { Opened } from "src/opened/opened.entity";
+import { OpenedManga } from "src/opened/opened.manga.entity";
 import { Pages } from "src/pages/pages.entity";
 import { UserComment } from "src/post/entities/post.entity";
 import { Tags } from "src/tags/tags.entity";
@@ -20,8 +20,8 @@ export class Manga {
     @JoinColumn()
     chapters:Chapter[]
 
-    @OneToMany(()=>Opened,opened=>opened.manga)
-    opened:Opened[]
+    @OneToMany(()=>OpenedManga,opened=>opened.manga)
+    opened:OpenedManga[]
 
     @OneToMany(()=>Favorite,favorite=>favorite.manga)
     favorite:Favorite[]

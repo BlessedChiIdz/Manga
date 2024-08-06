@@ -12,9 +12,11 @@ import { dbdatasource } from './config/data.source';
 import { PostModule } from './post/post.module';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from 'constants/jwt.constants';
-import { OpenedModule } from './opened/opened.module';
+import { OpenedModule } from './opened/opened.manga.module';
 import { TagsModule } from './tags/tags.module';
 import { DevtoolsModule } from '@nestjs/devtools-integration';
+import { SeedsModule } from './seeds/seeds.module';
+import { OpenedChaptersModule } from './opened-chapters/opened.chapters.module';
 require('dotenv').config();
 
 @Module({
@@ -34,6 +36,8 @@ require('dotenv').config();
     }),
    OpenedModule,
    TagsModule,
+   SeedsModule,
+   OpenedChaptersModule,
 
   ],
 }) 
